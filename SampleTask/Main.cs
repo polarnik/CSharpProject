@@ -9,29 +9,27 @@ namespace SampleTask
 	{
 		public static void Main (string[] args)
 		{
-			RefactoringClass refactoring = new RefactoringClass();
+			var refactoring = new RefactoringClass();
 			float firstResult, secondResult;
 			refactoring.Foo(+7, +7, out firstResult, out secondResult);
 			Console.WriteLine ("Refactoring Task: " + firstResult + " " + secondResult);
 			
-			Console.WriteLine ("Duplicate Task: ");
-			ArrayClass arrayClass = new ArrayClass();
-			int [] intArray = arrayClass.GetArray(10);
+			Console.WriteLine ("Duplicate Task:");
+			var arrayClass = new ArrayClass();
+			var intArray = arrayClass.GetArray(10);
 			arrayClass.Print(intArray);
 			arrayClass.Print(arrayClass.GetDuplicatesWithLinq(intArray));
 			arrayClass.Print(arrayClass.GetDuplicates(intArray));
 		}
-		
-
 	}
 	
 	public class RefactoringClass
 	{		
 		public void Foo(int firstDivider, int secondDivider, out float firstResult, out float secondResult)
 		{
-			const int count = 10;
-			const int x = 5;
-			const int y = 3;
+			var count = 10;
+			var x = 5;
+			var y = 3;
 			
 			if (firstDivider <= 0)
 				throw new ArgumentException("Only positive values is valid", "firstDivider");
@@ -47,10 +45,10 @@ namespace SampleTask
 	{
 		public int[] GetArray(byte arraySize = 10)
 		{
-			int[] intArray = new int[arraySize];
+			var intArray = new int[arraySize];
 			
-			Random random = new Random();
-			for(int i = 0; i < arraySize; i++)
+			var random = new Random();
+			for(var i = 0; i < arraySize; i++)
 			{
 				intArray[i] = random.Next(0, 9);
 			}
@@ -59,7 +57,7 @@ namespace SampleTask
 		
 		public void Print(int [] intArray)
 		{
-			foreach(int item in intArray)
+			foreach(var item in intArray)
 			{
 				Console.WriteLine(item);
 			}
@@ -68,11 +66,10 @@ namespace SampleTask
 		
 		public int [] GetDuplicates(int[] intArray)
 		{			
-			System.Collections.Generic.Dictionary<int, uint> valuesAndCountDict = 
-				new System.Collections.Generic.Dictionary<int, uint>();
-			for(int i = 0; i < intArray.Length; i++)
+			var valuesAndCountDict = new Dictionary<int, uint>();
+			for(var i = 0; i < intArray.Length; i++)
 			{
-				int intItem = intArray[i];
+				var intItem = intArray[i];
 				if(valuesAndCountDict.ContainsKey(intItem))
 				{
 					valuesAndCountDict[intItem] = valuesAndCountDict[intItem] + 1;
@@ -82,8 +79,8 @@ namespace SampleTask
 					valuesAndCountDict.Add(intItem, 1);
 				}
 			}
-			List<int> result = new List<int>();
-			foreach(int key in valuesAndCountDict.Keys)
+			var result = new List<int>();
+			foreach(var key in valuesAndCountDict.Keys)
 			{
 				if(valuesAndCountDict[key] > 1)
 					result.Add(key);
